@@ -1,4 +1,4 @@
-package com.crype.onboardingapp.ui.theme
+package com.crype.onboardingapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

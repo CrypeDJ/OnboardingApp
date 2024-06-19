@@ -1,4 +1,4 @@
-package com.crype.onboardingapp.ui.theme
+package com.crype.onboardingapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
