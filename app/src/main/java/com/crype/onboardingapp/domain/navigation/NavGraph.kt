@@ -17,7 +17,7 @@ fun SetupNavGraph(
         startDestination = startDestination
     ) {
         composable(route = Screen.Onboarding.route) {
-            OnboardingScreen(navController = navController)
+            OnboardingScreen(navController)
         }
         composable(route = Screen.Home.route) {
             HomeScreen()

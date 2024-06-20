@@ -54,8 +54,8 @@ fun PagerScreen (
 ){
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(onBoardingPage.backgroundColor),
+            .fillMaxWidth()
+            .padding(top = 40.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
 
@@ -73,7 +73,7 @@ fun PagerScreen (
                     modifier = Modifier.fillMaxWidth(),
                     text = onBoardingPage.title,
                     fontSize = 28.sp,
-                    fontFamily = FontFamily.Serif,
+                    fontFamily = fontFamilySF,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
@@ -82,7 +82,7 @@ fun PagerScreen (
                     modifier = Modifier.fillMaxWidth(),
                     text = onBoardingPage.description,
                     fontSize = 18.sp,
-                    fontFamily = FontFamily.Serif,
+                    fontFamily = fontFamilySF,
                     fontWeight = FontWeight.Light,
                     color = Color.White
                 )
@@ -95,52 +95,6 @@ fun PagerScreen (
             modifier = Modifier
                 .fillMaxWidth()
         )
-        Spacer(modifier = Modifier.size(40.dp).weight(1f))
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp, vertical = 40.dp),
-
-        ){
-            Column (horizontalAlignment = Alignment.Start){
-                Row(
-                    Modifier
-                        .wrapContentHeight()
-
-                        .padding(bottom = 8.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    repeat(4) { iteration ->
-                        val color = if (2 == iteration) Color.White else TranspanentWhite
-                        val width = if (iteration == 2) 25.dp else 8.dp
-                        Box(
-                            modifier = Modifier
-                                .padding(3.dp)
-                                .clip(CircleShape)
-                                .background(color)
-                                .height(8.dp)
-                                .width(width)
-                        )
-                    }
-                }
-                TextButton(
-                    onClick = { /*TODO*/ },
-
-                ) {
-                    Text (
-                        text = "Skip",
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.Light,
-                        color = Color.White,
-                        textAlign = TextAlign.Left
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            ButtonNext(progress = 1f, colorTextButton = onBoardingPage.backgroundColor) {}
-        }
-
     }
 }
 
@@ -153,61 +107,5 @@ fun ScreenPreview (){
     }
 }
 
-@Composable
-fun ButtonNext(progress: Float, colorTextButton: Color, onClick: () -> Unit) {
-    val animatedProgress by animateFloatAsState(
-        targetValue = progress,
-        animationSpec = tween(durationMillis = 1000), label = ""
-    )
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.size(60.dp)
-    ) {
-        Canvas(modifier = Modifier.size(100.dp)) {
-            val sweepAngle = 360 * animatedProgress
-            drawArc(
-                color = TranspanentWhite,
-                startAngle = -90f,
-                sweepAngle = 360f,
-                useCenter = false,
-                style = Stroke(width = 3.dp.toPx(), cap = StrokeCap.Round)
-            )
-            drawArc(
-                color = Color.White,
-                startAngle = -90f,
-                sweepAngle = sweepAngle,
-                useCenter = false,
-                style = Stroke(width = 3.dp.toPx(), cap = StrokeCap.Round)
-            )
-        }
-        Button(
-            onClick = {  },
-            shape = CircleShape,
-            modifier = Modifier
-                .size(45.dp)
-                .clip(CircleShape),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White
-            ),
-            contentPadding = PaddingValues(
-                start = 15.dp,
-                top = 10.dp,
-                end = 15.dp,
-                bottom = 10.dp,
-            )
-        ) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Canvas(modifier = Modifier.fillMaxSize()) {
-                    val path = androidx.compose.ui.graphics.Path().apply {
-                        moveTo(size.width * 0.3f, size.height * 0.2f)
-                        lineTo(size.width * 0.7f, size.height * 0.5f)
-                        lineTo(size.width * 0.3f, size.height * 0.8f)
-                    }
-                    drawPath(path = path, color = colorTextButton, style = Stroke(width = 7f))
-                }
-            }
-        }
-    }
-}
 
